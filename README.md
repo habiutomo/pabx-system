@@ -4,10 +4,7 @@ A comprehensive Private Automatic Branch Exchange (PABX) billing system designed
 
 ![Alt Text](1.png)
 
-<video width="600" controls>
-  <source src="1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Watch the demo video](1.mp4)
 
 ## Features
 
