@@ -13,7 +13,7 @@ export function formatDuration(seconds: number): string {
 export function formatDateTime(dateString: string | Date): string {
   const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
   
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -27,7 +27,7 @@ export function formatDateTime(dateString: string | Date): string {
 export function formatDate(dateString: string | Date): string {
   const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
   
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('id-ID', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit'
@@ -43,17 +43,17 @@ export function formatCallType(type: string): { label: string, className: string
       };
     case 'local':
       return { 
-        label: 'Local', 
+        label: 'Lokal', 
         className: 'bg-[#0078D4]/20 text-[#0078D4]' 
       };
     case 'long-distance':
       return { 
-        label: 'Long Distance', 
+        label: 'Jarak Jauh', 
         className: 'bg-[#FFB900]/20 text-[#FFB900]' 
       };
     case 'international':
       return { 
-        label: 'International', 
+        label: 'Internasional', 
         className: 'bg-[#A80000]/20 text-[#A80000]' 
       };
     default:
@@ -72,7 +72,7 @@ export function formatHoursMinutes(seconds: number): string {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   
-  return `${hours}h ${minutes}m`;
+  return `${hours}j ${minutes}m`;
 }
 
 export function formatPercentChange(value: number): string {

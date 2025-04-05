@@ -35,15 +35,23 @@ export default function Dashboard() {
   const formattedEndDate = endDate.toISOString().split('T')[0];
   
   // Fetch call stats
-  const { data: callStats, isLoading: statsLoading } = useQuery({
+  type CallStatsResponse = {
+    totalCalls: number;
+    totalDuration: number;
+    totalCost: number;
+    avgCostPerCall: number;
+    callsByType: Record<string, number>;
+  };
+
+  const { data: callStats, isLoading: statsLoading } = useQuery<CallStatsResponse>({
     queryKey: ['/api/stats/calls', formattedStartDate, formattedEndDate],
     enabled: !!startDate && !!endDate
   });
   
   const handleGenerateInvoices = () => {
     toast({
-      title: "Generating Invoices",
-      description: "Invoices are being generated and will be available shortly.",
+      title: "Membuat Faktur",
+      description: "Faktur sedang dibuat dan akan segera tersedia.",
       duration: 3000
     });
   };
@@ -51,7 +59,7 @@ export default function Dashboard() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-neutral-700 mb-4 sm:mb-0">Billing Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-neutral-700 mb-4 sm:mb-0">Dasbor Penagihan</h1>
         
         <DateRangeSelector 
           value={dateRange}
@@ -63,8 +71,8 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <StatsCard 
-          title="Total Calls"
-          value={statsLoading ? "Loading..." : formatNumberWithCommas(callStats?.totalCalls || 0)}
+          title="Total Panggilan"
+          value={statsLoading ? "Memuat..." : formatNumberWithCommas(callStats?.totalCalls || 0)}
           change={{
             value: "12.5%",
             isIncrease: true
@@ -74,8 +82,8 @@ export default function Dashboard() {
         />
         
         <StatsCard 
-          title="Total Duration"
-          value={statsLoading ? "Loading..." : formatHoursMinutes(callStats?.totalDuration || 0)}
+          title="Total Durasi"
+          value={statsLoading ? "Memuat..." : formatHoursMinutes(callStats?.totalDuration || 0)}
           change={{
             value: "8.3%",
             isIncrease: true
@@ -85,8 +93,13 @@ export default function Dashboard() {
         />
         
         <StatsCard 
-          title="Total Cost"
-          value={statsLoading ? "Loading..." : `$${callStats?.totalCost.toFixed(2) || '0.00'}`}
+          title="Total Biaya"
+          value={statsLoading ? "Memuat..." : new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(callStats?.totalCost || 0)}
           change={{
             value: "15.2%",
             isIncrease: true
@@ -96,8 +109,13 @@ export default function Dashboard() {
         />
         
         <StatsCard 
-          title="Avg Cost Per Call"
-          value={statsLoading ? "Loading..." : `$${callStats?.avgCostPerCall.toFixed(2) || '0.00'}`}
+          title="Rata-rata Biaya per Panggilan"
+          value={statsLoading ? "Memuat..." : new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(callStats?.avgCostPerCall || 0)}
           change={{
             value: "2.1%",
             isIncrease: false

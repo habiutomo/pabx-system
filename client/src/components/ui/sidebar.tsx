@@ -46,43 +46,43 @@ export default function Sidebar({ mobileMenuOpen, toggleMobileMenu }: SidebarPro
     <nav className="mt-2">
       <SidebarItem 
         icon={<BarChart2 />} 
-        text="Dashboard" 
+        text="Dasbor" 
         href="/" 
         active={location === '/'}
       />
       <SidebarItem 
         icon={<Phone />} 
-        text="Call History" 
+        text="Riwayat Panggilan" 
         href="/call-history" 
         active={location === '/call-history'}
       />
       <SidebarItem 
         icon={<FileText />} 
-        text="Billing & Invoices" 
+        text="Penagihan & Faktur" 
         href="/billing" 
         active={location === '/billing'}
       />
       <SidebarItem 
         icon={<LineChart />} 
-        text="Reports" 
+        text="Laporan" 
         href="/reports" 
         active={location === '/reports'}
       />
       <SidebarItem 
         icon={<DollarSign />} 
-        text="Rate Configuration" 
+        text="Konfigurasi Tarif" 
         href="/rate-config" 
         active={location === '/rate-config'}
       />
       <SidebarItem 
         icon={<Users />} 
-        text="User Management" 
+        text="Manajemen Pengguna" 
         href="/user-management" 
         active={location === '/user-management'}
       />
       <SidebarItem 
         icon={<Settings />} 
-        text="Settings" 
+        text="Pengaturan" 
         href="/settings" 
         active={location === '/settings'}
       />
@@ -96,7 +96,7 @@ export default function Sidebar({ mobileMenuOpen, toggleMobileMenu }: SidebarPro
         <div className="px-4 py-6">
           <h1 className="text-xl font-semibold text-neutral-700 flex items-center">
             <Phone className="mr-2 text-[#0078D4]" />
-            PABX Billing
+            Sistem Penagihan PABX
           </h1>
         </div>
         {sidebarContent}
@@ -113,7 +113,7 @@ export default function Sidebar({ mobileMenuOpen, toggleMobileMenu }: SidebarPro
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-xl font-semibold text-neutral-700 flex items-center">
               <Phone className="mr-2 text-[#0078D4]" />
-              PABX Billing
+              Sistem Penagihan PABX
             </h1>
             <button onClick={toggleMobileMenu}>
               <X className="text-neutral-600" />

@@ -69,13 +69,13 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
   return (
     <div className="bg-white rounded-md shadow-sm overflow-hidden">
       <div className="p-4 border-b border-neutral-200 flex justify-between items-center">
-        <h3 className="font-semibold text-neutral-700">Recent Calls</h3>
+        <h3 className="font-semibold text-neutral-700">Panggilan Terbaru</h3>
         
         <div className="flex items-center">
           <form onSubmit={handleSearch} className="relative mr-4">
             <Input
               type="text"
-              placeholder="Search calls..."
+              placeholder="Cari panggilan..."
               className="pl-9 pr-4 py-2 rounded-md bg-neutral-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -85,7 +85,7 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
           
           <Button onClick={handleExport} className="flex items-center">
             <Download className="mr-2 h-4 w-4" />
-            Export
+            Ekspor
           </Button>
         </div>
       </div>
@@ -94,20 +94,20 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
         <Table>
           <TableHeader className="bg-neutral-100">
             <TableRow>
-              <TableHead>Date & Time</TableHead>
-              <TableHead>Source</TableHead>
-              <TableHead>Destination</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Duration</TableHead>
-              <TableHead>Cost</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead>Tanggal & Waktu</TableHead>
+              <TableHead>Sumber</TableHead>
+              <TableHead>Tujuan</TableHead>
+              <TableHead>Tipe</TableHead>
+              <TableHead>Durasi</TableHead>
+              <TableHead>Biaya</TableHead>
+              <TableHead>Aksi</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={7} className="text-center py-8">
-                  Loading calls...
+                  Memuat panggilan...
                 </TableCell>
               </TableRow>
             ) : data && data.calls.length > 0 ? (
@@ -122,9 +122,14 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
                     </div>
                   </TableCell>
                   <TableCell>{formatDuration(call.duration)}</TableCell>
-                  <TableCell>${Number(call.cost).toFixed(2)}</TableCell>
+                  <TableCell>{new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                  }).format(Number(call.cost))}</TableCell>
                   <TableCell>
-                    <Button variant="ghost" size="icon" className="text-primary hover:text-primary-dark" title="View Details">
+                    <Button variant="ghost" size="icon" className="text-primary hover:text-primary-dark" title="Lihat Detail">
                       <Eye className="h-4 w-4" />
                     </Button>
                   </TableCell>
@@ -133,7 +138,7 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
             ) : (
               <TableRow>
                 <TableCell colSpan={7} className="text-center py-8">
-                  No calls found
+                  Tidak ditemukan panggilan
                 </TableCell>
               </TableRow>
             )}
@@ -144,7 +149,7 @@ export default function CallTable({ startDate, endDate }: CallTableProps) {
       {data && data.total > 0 && (
         <div className="p-4 border-t border-neutral-200 flex justify-between items-center">
           <div className="text-sm text-neutral-500">
-            Showing <span className="font-medium">{((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, data.total)}</span> of <span className="font-medium">{data.total}</span> calls
+            Menampilkan <span className="font-medium">{((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, data.total)}</span> dari <span className="font-medium">{data.total}</span> panggilan
           </div>
           
           <Pagination 
